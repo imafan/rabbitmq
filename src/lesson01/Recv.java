@@ -7,6 +7,7 @@ import com.rabbitmq.client.QueueingConsumer;
 
 /**
  * Created by imafan on 2016-05-05.
+ * rabbitmq入门
  */
 public class Recv {
     //队列名称

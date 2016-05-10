@@ -6,6 +6,7 @@ import com.rabbitmq.client.ConnectionFactory;
 
 /**
  * Created by imafan on 2016-05-05.
+ * rabbitmq入门
  */
 public class Send {
     //队列名称

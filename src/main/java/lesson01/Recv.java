@@ -7,29 +7,29 @@ import com.rabbitmq.client.QueueingConsumer;
 
 /**
  * Created by imafan on 2016-05-05.
- * rabbitmqÈëÃÅ
+ * rabbitmqå…¥é—¨
  */
 public class Recv {
-    //¶ÓÁĞÃû³Æ
+    //é˜Ÿåˆ—åç§°
     private final static String QUEUE_NAME = "hello";
 
     public static void main(String[] argv) throws Exception{
-        //´ò¿ªÁ¬½ÓºÍ´´½¨ÆµµÀ£¬Óë·¢ËÍ¶ËÒ»Ñù
+        //æ‰“å¼€è¿æ¥å’Œåˆ›å»ºé¢‘é“ï¼Œä¸å‘é€ç«¯ä¸€æ ·
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
-        //ÉùÃ÷¶ÓÁĞ£¬Ö÷ÒªÎªÁË·ÀÖ¹ÏûÏ¢½ÓÊÕÕßÏÈÔËĞĞ´Ë³ÌĞò£¬¶ÓÁĞ»¹²»´æÔÚÊ±´´½¨¶ÓÁĞ¡£
+        //å£°æ˜é˜Ÿåˆ—ï¼Œä¸»è¦ä¸ºäº†é˜²æ­¢æ¶ˆæ¯æ¥æ”¶è€…å…ˆè¿è¡Œæ­¤ç¨‹åºï¼Œé˜Ÿåˆ—è¿˜ä¸å­˜åœ¨æ—¶åˆ›å»ºé˜Ÿåˆ—ã€‚
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
-        //´´½¨¶ÓÁĞÏû·ÑÕß
+        //åˆ›å»ºé˜Ÿåˆ—æ¶ˆè´¹è€…
         QueueingConsumer consumer = new QueueingConsumer(channel);
-        //Ö¸¶¨Ïû·Ñ¶ÓÁĞ
+        //æŒ‡å®šæ¶ˆè´¹é˜Ÿåˆ—
         channel.basicConsume(QUEUE_NAME, true, consumer);
         while (true)
         {
-            //nextDeliveryÊÇÒ»¸ö×èÈû·½·¨£¨ÄÚ²¿ÊµÏÖÆäÊµÊÇ×èÈû¶ÓÁĞµÄtake·½·¨£©
+            //nextDeliveryæ˜¯ä¸€ä¸ªé˜»å¡æ–¹æ³•ï¼ˆå†…éƒ¨å®ç°å…¶å®æ˜¯é˜»å¡é˜Ÿåˆ—çš„takeæ–¹æ³•ï¼‰
             QueueingConsumer.Delivery delivery = consumer.nextDelivery();
             String message = new String(delivery.getBody());
             System.out.println(" [x] Received '" + message + "'");

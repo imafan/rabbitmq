@@ -8,29 +8,27 @@ import com.rabbitmq.client.QueueingConsumer;
 /**
  * Created by imafan on 2016-05-10.
  *
- * ÏûÏ¢Ó¦´ğ£¨message acknowledgments£©
+ * Round-robin è½¬å‘ï¼Œå¹³å‡åˆ†é…ç»™Consumer
  */
-public class Work02 {
-    //¶ÓÁĞÃû³Æ
+public class Work {
     private final static String QUEUE_NAME = "workqueue";
 
     public static void main(String[] argv) throws Exception{
-        //Çø·Ö²»Í¬¹¤×÷½ø³ÌµÄÊä³ö
+        //åŒºåˆ†ä¸åŒå·¥ä½œè¿›ç¨‹çš„è¾“å‡º
         int hashCode = Work.class.hashCode();
-        //´´½¨Á¬½ÓºÍÆµµÀ
+        //åˆ›å»ºè¿æ¥å’Œé¢‘é“
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
-        //ÉùÃ÷¶ÓÁĞ
+        //å£°æ˜é˜Ÿåˆ—
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
         System.out.println(hashCode
                 + " [*] Waiting for messages. To exit press CTRL+C");
+
         QueueingConsumer consumer = new QueueingConsumer(channel);
-        // Ö¸¶¨Ïû·Ñ¶ÓÁĞ
-        boolean ack = false ;
-        //´ò¿ªÓ¦´ğ»úÖÆ
-        channel.basicConsume(QUEUE_NAME, ack, consumer);
+        // æŒ‡å®šæ¶ˆè´¹é˜Ÿåˆ—
+        channel.basicConsume(QUEUE_NAME, true, consumer);
         while (true)
         {
             QueueingConsumer.Delivery delivery = consumer.nextDelivery();
@@ -39,15 +37,13 @@ public class Work02 {
             System.out.println(hashCode + " [x] Received '" + message + "'");
             doWork(message);
             System.out.println(hashCode + " [x] Done");
-            //·¢ËÍÓ¦´ğ
-            channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
 
         }
 
     }
 
     /**
-     * Ã¿¸öµãºÄÊ±1s
+     * æ¯ä¸ªç‚¹è€—æ—¶1s
      * @param task
      * @throws InterruptedException
      */

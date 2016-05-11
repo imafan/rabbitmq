@@ -8,7 +8,7 @@ import com.rabbitmq.client.ConnectionFactory;
 /**
  * Created by imafan on 2016-05-10.
  *
- * Round-robin ×ª·¢£¬Æ½¾ù·ÖÅä¸øConsumer
+ * Round-robin è½¬å‘ï¼Œå¹³å‡åˆ†é…ç»™Consumer
  */
 public class NewTask {
 
@@ -31,7 +31,7 @@ public class NewTask {
             channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
             System.out.println(" [x] Sent '" + message + "'");
         }
-        //¹Ø±ÕÆµµÀºÍ×ÊÔ´
+        //å…³é—­é¢‘é“å’Œèµ„æº
         channel.close();
         connection.close();
     }

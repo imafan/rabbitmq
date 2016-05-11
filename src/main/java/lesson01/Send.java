@@ -6,32 +6,32 @@ import com.rabbitmq.client.ConnectionFactory;
 
 /**
  * Created by imafan on 2016-05-05.
- * rabbitmqÈëÃÅ
+ * rabbitmqå…¥é—¨
  */
 public class Send {
-    //¶ÓÁĞÃû³Æ
+    //é˜Ÿåˆ—åç§°
     private final static String QUEUE_NAME = "hello";
 
     public static void main(String[] argv) throws Exception
     {
         /**
-         * ´´½¨Á¬½ÓÁ¬½Óµ½MabbitMQ
+         * åˆ›å»ºè¿æ¥è¿æ¥åˆ°MabbitMQ
          */
         ConnectionFactory factory = new ConnectionFactory();
-        //ÉèÖÃMabbitMQËùÔÚÖ÷»úip»òÕßÖ÷»úÃû
+        //è®¾ç½®MabbitMQæ‰€åœ¨ä¸»æœºipæˆ–è€…ä¸»æœºå
         factory.setHost("localhost");
-        //´´½¨Ò»¸öÁ¬½Ó
+        //åˆ›å»ºä¸€ä¸ªè¿æ¥
         Connection connection = factory.newConnection();
-        //´´½¨Ò»¸öÆµµÀ
+        //åˆ›å»ºä¸€ä¸ªé¢‘é“
         Channel channel = connection.createChannel();
-        //Ö¸¶¨Ò»¸ö¶ÓÁĞ
+        //æŒ‡å®šä¸€ä¸ªé˜Ÿåˆ—
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-        //·¢ËÍµÄÏûÏ¢
+        //å‘é€çš„æ¶ˆæ¯
         String message = "hello world!";
-        //Íù¶ÓÁĞÖĞ·¢³öÒ»ÌõÏûÏ¢
+        //å¾€é˜Ÿåˆ—ä¸­å‘å‡ºä¸€æ¡æ¶ˆæ¯
         channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
         System.out.println(" [x] Sent '" + message + "'");
-        //¹Ø±ÕÆµµÀºÍÁ¬½Ó
+        //å…³é—­é¢‘é“å’Œè¿æ¥
         channel.close();
         connection.close();
     }

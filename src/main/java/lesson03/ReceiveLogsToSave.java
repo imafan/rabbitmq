@@ -6,6 +6,7 @@ import com.rabbitmq.client.ConnectionFactory;
 
 /**
  * Created by imafan on 2016-05-13.
+ * ·¢²¼/¶©ÔÄ£¨Publish/Subscribe£©
  */
 public class ReceiveLogsToSave {
     private final static String EXCHANGE_NAME = "ex_log";

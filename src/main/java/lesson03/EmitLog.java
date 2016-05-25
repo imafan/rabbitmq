@@ -8,6 +8,7 @@ import java.util.Date;
 
 /**
  * Created by imafan on 2016-05-11.
+ * ·¢²¼/¶©ÔÄ£¨Publish/Subscribe£©
  */
 public class EmitLog {
 

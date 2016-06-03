@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * Created by imafan on 2016-05-11.
- * ·¢²¼/¶©ÔÄ£¨Publish/Subscribe£©
+ * å‘å¸ƒ/è®¢é˜…ï¼ˆPublish/Subscribeï¼‰
  */
 public class EmitLog {
 
@@ -24,11 +24,11 @@ public class EmitLog {
 
         Channel channel = connection.createChannel();
 
-        // ÉùÃ÷×ª·¢Æ÷ºÍÀàĞÍ
+        // å£°æ˜è½¬å‘å™¨å’Œç±»å‹
         channel.exchangeDeclare(EXCHANGE_NAME, "fanout" );
 
         String message = new Date().toLocaleString()+" : log something";
-        // Íù×ª·¢Æ÷ÉÏ·¢ËÍÏûÏ¢
+        // å¾€è½¬å‘å™¨ä¸Šå‘é€æ¶ˆæ¯
         channel.basicPublish(EXCHANGE_NAME, "", null, message.getBytes());
 
         System.out.println(" [x] Sent '" + message + "'");

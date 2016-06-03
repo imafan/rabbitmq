@@ -6,7 +6,7 @@ import com.rabbitmq.client.ConnectionFactory;
 
 /**
  * Created by imafan on 2016-05-13.
- * ·¢²¼/¶©ÔÄ£¨Publish/Subscribe£©
+ * å‘å¸ƒ/è®¢é˜…ï¼ˆPublish/Subscribeï¼‰
  */
 public class ReceiveLogsToSave {
     private final static String EXCHANGE_NAME = "ex_log";
@@ -16,9 +16,9 @@ public class ReceiveLogsToSave {
         factory.setHost("localhost");
         Connection conncetion = factory.newConnection();
         Channel channel = conncetion.createChannel();
-        // ´´½¨Ò»¸ö·Ç³Ö¾ÃµÄ¡¢Î¨Ò»µÄÇÒ×Ô¶¯É¾³ıµÄ¶ÓÁĞ
+        // åˆ›å»ºä¸€ä¸ªéæŒä¹…çš„ã€å”¯ä¸€çš„ä¸”è‡ªåŠ¨åˆ é™¤çš„é˜Ÿåˆ—
         String queueName = channel.queueDeclare().getQueue();
-        // Îª×ª·¢Æ÷Ö¸¶¨¶ÓÁĞ£¬ÉèÖÃbinding
+        // ä¸ºè½¬å‘å™¨æŒ‡å®šé˜Ÿåˆ—ï¼Œè®¾ç½®binding
         channel.queueBind(queueName,EXCHANGE_NAME,"");
 
         channel.close();
